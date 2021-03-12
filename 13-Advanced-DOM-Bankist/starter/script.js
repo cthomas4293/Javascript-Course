@@ -95,3 +95,22 @@ btnScrollTo.addEventListener('click', function (e) {
   // Smooth Scrolling (Modern Method - ONLY WORKS IN MODERN BROWSERS)
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+// Event Listeners
+
+const h1 = document.querySelector('h1');
+// mouseenter works like css hover
+
+const alertH1 = function (e) {
+  alert('AddEventListenter: Great! You are reading the heading!! :D ');
+
+  // makes it so you can only listen once
+  h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+// each element has an onevent property - old way
+// h1.onmouseenter = function (e) {
+//   alert('AddEventListenter: Great! You are reading the heading!! :D ');
+// };
