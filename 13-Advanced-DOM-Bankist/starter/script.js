@@ -1,12 +1,14 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+
+/////////////////////////////////////////////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -32,6 +34,71 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+/////////////////////////////////////////////////////////////////////////////
+// Smooth Scolling
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  // console.log(s1coords);
+  // console.log(e.target.getBoundingClientRect());
+
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // Smooth Scrolling (manually/ old-school)
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // Smooth Scrolling (Modern Method - ONLY WORKS IN MODERN BROWSERS)
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+// Event Listeners
+
+// const h1 = document.querySelector('h1');
+// // mouseenter works like css hover
+
+// const alertH1 = function (e) {
+//   alert('AddEventListenter: Great! You are reading the heading!! :D ');
+
+//   // makes it so you can only listen once
+//   h1.removeEventListener('mouseenter', alertH1);
+// };
+
+// h1.addEventListener('mouseenter', alertH1);
+
+/////////////////////////////////////////////////////////////////////////////
+// Page Navigation
+
+// Because you are calling a function for each link it would slow performance
+// document.querySelectorAll('.nav__link').forEach(function (curr) {
+//   curr.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//     console.log('LINK');
+//   });
+// });
+
+// 1. Add event listener to common parent element
+const parentElement = document.querySelector('.nav__links');
+// 2. Determine what element originated the event
+parentElement.addEventListener('click', function (e) {
+  e.preventDefault();
+  // matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+/////////////////////////////////////////////////////////////////////////////
 // // creating a DOM Element
 // const message = document.createElement('div');
 // message.classList.add('cookie-message');
@@ -70,45 +137,6 @@ document.addEventListener('keydown', function (e) {
 // console.log(logo.className);
 
 // Smooth Scrolling
-
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
-btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  // console.log(s1coords);
-  // console.log(e.target.getBoundingClientRect());
-
-  // Scrolling
-  // window.scrollTo(
-  //   s1coords.left + window.pageXOffset,
-  //   s1coords.top + window.pageYOffset
-  // );
-
-  // Smooth Scrolling (manually/ old-school)
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: 'smooth',
-  // });
-
-  // Smooth Scrolling (Modern Method - ONLY WORKS IN MODERN BROWSERS)
-  section1.scrollIntoView({ behavior: 'smooth' });
-});
-
-// Event Listeners
-
-const h1 = document.querySelector('h1');
-// mouseenter works like css hover
-
-const alertH1 = function (e) {
-  alert('AddEventListenter: Great! You are reading the heading!! :D ');
-
-  // makes it so you can only listen once
-  h1.removeEventListener('mouseenter', alertH1);
-};
-
-h1.addEventListener('mouseenter', alertH1);
 
 // each element has an onevent property - old way
 // h1.onmouseenter = function (e) {
