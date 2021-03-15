@@ -161,3 +161,31 @@ parentElement.addEventListener('click', function (e) {
 //   .addEventListener('click', function (e) {});
 
 // document.querySelector('.nav').addEventListener('click', function (e) {});
+
+// DOM Traversing
+
+// const h1 = document.querySelector('h1');
+
+// // Goind Downward: child
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.childNodes);
+// console.log(h1.children);
+// h1.firstElementChild.style.color = 'white';
+// h1.lastElementChild.style.color = 'orangered';
+
+// // Going Upward: parent
+// // Direct parents
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
+
+// // querySelector() finds children, where as closest() finds parents - no matter how far in the DOM tree
+// // selects the closest parent element that matches the querey string passed in
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+// // going sideways: siblings
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
+// console.log(h1.previousSibling);
+// console.log(h1.nextSibling);
+
+// console.log(h1.parentElement.children);
