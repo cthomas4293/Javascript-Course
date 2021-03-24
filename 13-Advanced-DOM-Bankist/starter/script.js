@@ -146,6 +146,17 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 
 nav.addEventListener('mouseout', handleHover.bind(1));
 /////////////////////////////////////////////////////////////////////////////
+// Sticky Navigation
+const initalCoords = section1.getBoundingClientRect();
+console.log(initalCoords);
+
+window.addEventListener('scroll', function () {
+  // console.log(window.scrollY);
+
+  if (window.scrollY > initalCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+});
+/////////////////////////////////////////////////////////////////////////////
 // // creating a DOM Element
 // const message = document.createElement('div');
 // message.classList.add('cookie-message');
