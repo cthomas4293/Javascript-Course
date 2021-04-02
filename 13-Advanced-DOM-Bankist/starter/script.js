@@ -210,7 +210,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 /////////////////////////////////////////////////////////////////////////////
@@ -237,6 +237,17 @@ const imgObserver = new IntersectionObserver(loadImg, {
 });
 
 imgTargets.forEach(img => imgObserver.observe(img));
+/////////////////////////////////////////////////////////////////////////////
+// Slider Component
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+
+slider.style.transform = 'scale(0.2)';
+slider.style.overflow = 'visible';
+
+// 0%, 100%, 200%, ...
+slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i})`));
+
 /////////////////////////////////////////////////////////////////////////////
 // // creating a DOM Element
 // const message = document.createElement('div');
