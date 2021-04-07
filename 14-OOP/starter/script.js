@@ -17,3 +17,12 @@ console.log(jonas instanceof Person);
 // 2. Function is called, this = {}
 // 3. New object is linked to Prototype
 // 4. function returns object
+
+// Prototype
+console.log(Person.prototype);
+
+Person.prototype.calcAge = function () {
+  console.log(2021 - this.birthYear);
+};
+
+jonas.calcAge();
