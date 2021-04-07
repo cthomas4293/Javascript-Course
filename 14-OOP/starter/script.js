@@ -25,4 +25,10 @@ Person.prototype.calcAge = function () {
   console.log(2021 - this.birthYear);
 };
 
+console.log(Person.__proto__);
+
 jonas.calcAge();
+const arr = [1, 2, 3, 4];
+
+const h1 = document.querySelector('h1');
+console.dir(h1);
