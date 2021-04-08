@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 const Person = function (firstName, birthYear) {
   this.firstName = firstName;
   this.birthYear = birthYear;
@@ -8,6 +8,10 @@ const Person = function (firstName, birthYear) {
   //   this.calcAge = function () {
   //     console.log(2021 - this.birthYear);
   //   };
+};
+
+Person.hey = function () {
+  console.log('Hey There');
 };
 // new Object
 
@@ -41,24 +45,75 @@ const Person = function (firstName, birthYear) {
 
 // Class Declaration
 class PersonCl {
-  constructor(firstName, birthYear) {
+  constructor(fullName, birthYear) {
     // object init is here
-    this.firstName = firstName;
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
   // object methods go here
   calcAge() {
     console.log(2037 - this.birthYear);
   }
+
+  greeting = function () {
+    console.log(`Hey ${this.fullName}, how are you doing?`);
+  };
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  // Set property that already exists
+  set fullName(name) {
+    console.log(name);
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // static method
+  static hey = function () {
+    console.log('Hey There');
+  };
 }
 
-PersonCl.prototype.greeting = function () {
-  console.log(`Hey ${this.firstName}, how are you doing?`);
-};
+const jessica = new PersonCl('jessica Davis', 1993);
+// jessica.calcAge();
+console.log(jessica.age);
 
-const jessica = new PersonCl('jessica', 1993);
-jessica.calcAge();
+// console.log(jessica.age);
 
 // 1. Classes are NOT Hoisted
 // 2. Classes are first-class citizens
 // 3. Class bodies are ALWAYS executed in strict mode
+
+const account = {
+  owner: 'jonas',
+  movements: [200, 530, 120, 300],
+  // getter
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+  // setter
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+account.latest = 50;
+*/
+// Object.create
+
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+};
+
+const steven = Object.create(PersonProto);
+
+steven.name = 'Steven';
+steven.birthYear = 2002;
