@@ -235,26 +235,58 @@ account.latest = 50;
 // const jay = Object.create(StudentProto);
 // jay.init('jay', 2012, 'Computer Science');
 
+// Public Instance Field - will be on all instances
+// Private Fields
+// Public Methods
+// Private Methods
+
 class Account {
+  // Public Fields (Instances) *NOT PROTOTYPE
+  local = navigator.language;
+
+  // Private Fields (Instances)
+  #movements = [];
+  #pin;
+
   constructor(owner, currency, pin) {
     // we can add anything in this constructor
     this.owner = owner;
     this.currency = currency;
-    this.pin = pin;
-    this.movement = [];
-    this.local = navigator.language;
+    // this.local = navigator.language;
+    // protected property
+    this.#pin = pin;
+    // this._movements = [];
 
     console.log(`Thanks ${this.owner} for opening a new account `);
   }
 
+  // Static function only accessible to class
+  static helper() {
+    console.log('Helper');
+  }
+
+  // Public Methods
   // Public Interface (API)
   deposit(val) {
-    this.movement.push(val);
+    this.#movements.push(val);
   }
 
   // withdrawl ABSTRACTS that it is just a deposit() with a '-' added
   withdrawl(val) {
     this.deposit(-val);
+  }
+
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log('Loan Approved!');
+    }
+  }
+
+  // Private Methods
+  // #approveLoan(val) {
+  _approveLoan(val) {
+    return true;
   }
 }
 
