@@ -120,33 +120,87 @@ account.latest = 50;
 
 // Inheritance between classes: Constructor Functions
 
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
-};
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
 
-Person.prototype.calcAge = function () {
-  console.log(2021 - this.birthYear);
-};
+// Person.prototype.calcAge = function () {
+//   console.log(2021 - this.birthYear);
+// };
 
-const Student = function (firstName, birthYear, course) {
-  Person.call(this, firstName, birthYear);
-  this.course = course;
-};
+// const Student = function (firstName, birthYear, course) {
+//   Person.call(this, firstName, birthYear);
+//   this.course = course;
+// };
 
-// Linking Student.prototype to Person.prototype
-Student.prototype = Object.create(Person.prototype);
+// // Linking Student.prototype to Person.prototype
+// Student.prototype = Object.create(Person.prototype);
 
-Student.prototype.introduce = function () {
-  console.log(`my name is ${this.firstName}, and I study ${this.course}`);
-};
+// Student.prototype.introduce = function () {
+//   console.log(`my name is ${this.firstName}, and I study ${this.course}`);
+// };
 
-const mike = new Student('mike', 2020, 'Computer Science');
+// const mike = new Student('mike', 2020, 'Computer Science');
 
-// makes the constructor of the Student prototype Student instead of Person
-Student.prototype.constructor = Student;
+// // makes the constructor of the Student prototype Student instead of Person
+// Student.prototype.constructor = Student;
 
-console.log(mike instanceof Student);
-console.log(mike instanceof Person);
-mike.introduce();
-mike.calcAge();
+// console.log(mike instanceof Student);
+// console.log(mike instanceof Person);
+// mike.introduce();
+// mike.calcAge();
+
+// Inheritance between classes: ES6 Classes
+
+class PersonCl {
+  constructor(fullName, birthYear) {
+    // object init is here
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  // object methods go here
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greeting = function () {
+    console.log(`Hey ${this.fullName}, how are you doing?`);
+  };
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  // Set property that already exists
+  set fullName(name) {
+    console.log(name);
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // static method
+  static hey = function () {
+    console.log('Hey There');
+  };
+}
+
+// extends keyword links prototypes behind the scene
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // this is the constructor function of the Parent class
+    // must happen first to create the this keyword in subclass
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`my name is ${this.fullName}, and I study ${this.course}`);
+  }
+}
+
+const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
