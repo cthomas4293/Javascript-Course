@@ -207,30 +207,57 @@ account.latest = 50;
 
 // Inheritance between classes: Object.create
 
-const PersonProto = {
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  },
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
 
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
 
-const steven = Object.create(PersonProto);
+// const steven = Object.create(PersonProto);
 
-// adds the prototype of Student to Person's prototype chain
-const StudentProto = Object.create(PersonProto);
+// // adds the prototype of Student to Person's prototype chain
+// const StudentProto = Object.create(PersonProto);
 
-StudentProto.init = function (firstName, birthYear, course) {
-  PersonProto.init.call(this, firstName, birthYear);
-  this.course = course;
-};
+// StudentProto.init = function (firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear);
+//   this.course = course;
+// };
 
-StudentProto.introduce = function () {
-  console.log(`Hello ${this.firstName}, you are studying ${this.course}`);
-};
+// StudentProto.introduce = function () {
+//   console.log(`Hello ${this.firstName}, you are studying ${this.course}`);
+// };
 
-const jay = Object.create(StudentProto);
-jay.init('jay', 2012, 'Computer Science');
+// const jay = Object.create(StudentProto);
+// jay.init('jay', 2012, 'Computer Science');
+
+class Account {
+  constructor(owner, currency, pin) {
+    // we can add anything in this constructor
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movement = [];
+    this.local = navigator.language;
+
+    console.log(`Thanks ${this.owner} for opening a new account `);
+  }
+
+  // Public Interface (API)
+  deposit(val) {
+    this.movement.push(val);
+  }
+
+  // withdrawl ABSTRACTS that it is just a deposit() with a '-' added
+  withdrawl(val) {
+    this.deposit(-val);
+  }
+}
+
+const acc1 = new Account('jonas', 'EUR', 1111);
+acc1.deposit(250);
+acc1.withdrawl(-140);
